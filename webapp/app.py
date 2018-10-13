@@ -1,18 +1,9 @@
-from flask import Flask, jsonify
-from sklearn import datasets, svm
-
+from flask import Flask
+from flask import request
+from PoliticalClassifier import PoliticalClassifier
 app = Flask(__name__)
-
-# Load Dataset from scikit-learn.
-digits = datasets.load_digits()
-
-@app.route('/')
-def hello():
-    clf = svm.SVC(gamma=0.001, C=100.)
-    clf.fit(digits.data[:-1], digits.target[:-1])
-    prediction = clf.predict(digits.data[-1:])
-
-    return jsonify({'prediction': repr(prediction)})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+cl = PoliticalClassifier()        
+@app.route('/',methods=['POST'])
+def get_predictions():
+    print(request.get_json()['text'])
+    return [cl.predict(x) for x in request.get_json()['text']]

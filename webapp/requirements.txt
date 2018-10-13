@@ -1,6 +1,7 @@
-gunicorn
-Flask
-Jinja2
-Werkzeug
-distribute
-wsgiref
+flask
+cherrypy
+h5py
+theano
+keras
+datadog
+healthcheck

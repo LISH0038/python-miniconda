@@ -10,6 +10,7 @@ RUN pip install -qr /tmp/requirements.txt
 ADD ./webapp /opt/webapp/
 WORKDIR /opt/webapp
 
-RUN conda install scikit-learn
+RUN conda install scipy
+RUN conda install numpy
 
 CMD gunicorn --bind 0.0.0.0:$PORT wsgi
